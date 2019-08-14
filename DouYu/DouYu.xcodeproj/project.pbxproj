@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		942E6BCD230465EE005DA15D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E6BCB230465EE005DA15D /* Home.storyboard */; };
+		942E6BD023046741005DA15D /* Live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E6BCE23046741005DA15D /* Live.storyboard */; };
+		942E6BD3230467D9005DA15D /* Follow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E6BD1230467D9005DA15D /* Follow.storyboard */; };
+		942E6BD623046816005DA15D /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E6BD423046816005DA15D /* Profile.storyboard */; };
 		9435221D230409B200C6BA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435221C230409B200C6BA2C /* AppDelegate.swift */; };
 		9435221F230409B200C6BA2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435221E230409B200C6BA2C /* ViewController.swift */; };
 		94352222230409B200C6BA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94352220230409B200C6BA2C /* Main.storyboard */; };
@@ -37,6 +40,9 @@
 
 /* Begin PBXFileReference section */
 		942E6BCC230465EE005DA15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DouYu/Classes/Main/Base.lproj/Home.storyboard; sourceTree = "<group>"; };
+		942E6BCF23046741005DA15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DouYu/Classes/Main/Base.lproj/Live.storyboard; sourceTree = "<group>"; };
+		942E6BD2230467D9005DA15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DouYu/Classes/Main/Base.lproj/Follow.storyboard; sourceTree = "<group>"; };
+		942E6BD523046816005DA15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DouYu/Classes/Main/Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		94352219230409B200C6BA2C /* DouYu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9435221C230409B200C6BA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9435221E230409B200C6BA2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -154,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				94352220230409B200C6BA2C /* Main.storyboard */,
-				942E6BCB230465EE005DA15D /* Home.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 		943522682304506400C6BA2C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				942E6BD423046816005DA15D /* Profile.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -169,6 +175,7 @@
 		943522692304506400C6BA2C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				942E6BCB230465EE005DA15D /* Home.storyboard */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -176,6 +183,7 @@
 		9435226A2304506400C6BA2C /* Live */ = {
 			isa = PBXGroup;
 			children = (
+				942E6BCE23046741005DA15D /* Live.storyboard */,
 			);
 			path = Live;
 			sourceTree = "<group>";
@@ -183,6 +191,7 @@
 		9435226B2304506400C6BA2C /* Follow */ = {
 			isa = PBXGroup;
 			children = (
+				942E6BD1230467D9005DA15D /* Follow.storyboard */,
 			);
 			path = Follow;
 			sourceTree = "<group>";
@@ -294,7 +303,10 @@
 				9435222A230409B400C6BA2C /* LaunchScreen.storyboard in Resources */,
 				94352227230409B400C6BA2C /* Assets.xcassets in Resources */,
 				94352222230409B200C6BA2C /* Main.storyboard in Resources */,
+				942E6BD023046741005DA15D /* Live.storyboard in Resources */,
 				942E6BCD230465EE005DA15D /* Home.storyboard in Resources */,
+				942E6BD623046816005DA15D /* Profile.storyboard in Resources */,
+				942E6BD3230467D9005DA15D /* Follow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +375,30 @@
 				942E6BCC230465EE005DA15D /* Base */,
 			);
 			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
+		942E6BCE23046741005DA15D /* Live.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				942E6BCF23046741005DA15D /* Base */,
+			);
+			name = Live.storyboard;
+			sourceTree = "<group>";
+		};
+		942E6BD1230467D9005DA15D /* Follow.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				942E6BD2230467D9005DA15D /* Base */,
+			);
+			name = Follow.storyboard;
+			sourceTree = "<group>";
+		};
+		942E6BD423046816005DA15D /* Profile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				942E6BD523046816005DA15D /* Base */,
+			);
+			name = Profile.storyboard;
 			sourceTree = "<group>";
 		};
 		94352220230409B200C6BA2C /* Main.storyboard */ = {
