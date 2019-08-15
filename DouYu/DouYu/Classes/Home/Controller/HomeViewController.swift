@@ -8,8 +8,9 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+private let kTitleViewHeight: CGFloat = 40
 
+class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +23,17 @@ extension HomeViewController {
     private func setupUI() {
         // 设置导航栏
         setNavigationBar()
+        
+        // 创建pageTitleView
+        setPageTitleVIew()
+    }
+    
+    private func setPageTitleVIew() {
+        let titleFrame = CGRect(x: 0, y: kStatusBarHeight + kNavigationBarHeight, width: kScreenWidth, height: kTitleViewHeight)
+        let titles = ["推荐", "游戏", "娱乐", "趣玩"]
+        
+        let pageTitleView = PageTitleVIew(frame: titleFrame, titles: titles)
+        view.addSubview(pageTitleView)
     }
     
     private func setNavigationBar() {

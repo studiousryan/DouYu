@@ -13,6 +13,8 @@
 		942E6BDE23047985005DA15D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E6BDD23047985005DA15D /* HomeViewController.swift */; };
 		942E6BE123055E9D005DA15D /* UIBarButtonItem-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E6BE023055E9D005DA15D /* UIBarButtonItem-Extension.swift */; };
 		942E6BEA2305673C005DA15D /* Follow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 942E6BE92305673C005DA15D /* Follow.storyboard */; };
+		942E6BEE23058AEB005DA15D /* PageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E6BED23058AEB005DA15D /* PageTitleView.swift */; };
+		942E6BF023058F36005DA15D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E6BEF23058F36005DA15D /* Common.swift */; };
 		9435221D230409B200C6BA2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435221C230409B200C6BA2C /* AppDelegate.swift */; };
 		9435221F230409B200C6BA2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9435221E230409B200C6BA2C /* ViewController.swift */; };
 		94352222230409B200C6BA2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94352220230409B200C6BA2C /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		942E6BDD23047985005DA15D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		942E6BE023055E9D005DA15D /* UIBarButtonItem-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem-Extension.swift"; sourceTree = "<group>"; };
 		942E6BE92305673C005DA15D /* Follow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Follow.storyboard; sourceTree = "<group>"; };
+		942E6BED23058AEB005DA15D /* PageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitleView.swift; sourceTree = "<group>"; };
+		942E6BEF23058F36005DA15D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		94352219230409B200C6BA2C /* DouYu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9435221C230409B200C6BA2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9435221E230409B200C6BA2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 		942E6BDB2304790B005DA15D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				942E6BED23058AEB005DA15D /* PageTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				942E6BDF23055E5A005DA15D /* Extensions */,
+				942E6BEF23058F36005DA15D /* Common.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -393,11 +399,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942E6BEE23058AEB005DA15D /* PageTitleView.swift in Sources */,
 				942E6BE123055E9D005DA15D /* UIBarButtonItem-Extension.swift in Sources */,
 				94352225230409B200C6BA2C /* DouYu.xcdatamodeld in Sources */,
 				9435221F230409B200C6BA2C /* ViewController.swift in Sources */,
 				9435221D230409B200C6BA2C /* AppDelegate.swift in Sources */,
 				942E6BDE23047985005DA15D /* HomeViewController.swift in Sources */,
+				942E6BF023058F36005DA15D /* Common.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
