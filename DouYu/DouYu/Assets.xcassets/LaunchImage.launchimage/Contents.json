@@ -27,21 +27,6 @@
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
-      "filename" : "Simulator Screen Shot - iPhone X - 2019-08-10 at 02.43.46-1.png",
-      "minimum-system-version" : "7.0",
-      "scale" : "2x"
-    },
-    {
-      "orientation" : "portrait",
-      "idiom" : "iphone",
-      "filename" : "Simulator Screen Shot - iPhone X - 2019-08-10 at 02.43.46-2.png",
-      "minimum-system-version" : "7.0",
-      "subtype" : "retina4",
-      "scale" : "2x"
     }
   ],
   "info" : {

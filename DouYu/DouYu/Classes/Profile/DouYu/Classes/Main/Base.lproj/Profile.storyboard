@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lb4-r4-uLx">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,7 +14,7 @@
             <objects>
                 <viewController id="xM9-Pk-BUV" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="stM-LG-XRF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="K2N-eD-O7m"/>
@@ -26,7 +29,7 @@
         <scene sceneID="Gej-RK-V6g">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lb4-r4-uLx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="my" selectedImage="my_fill" id="DDb-TF-ytR">
+                    <tabBarItem key="tabBarItem" title="我" image="btn_user_normal" selectedImage="btn_user_selected" id="DDb-TF-ytR">
                         <color key="badgeColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -45,7 +48,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="my" width="32" height="32"/>
-        <image name="my_fill" width="32" height="32"/>
+        <image name="btn_user_normal" width="24" height="24"/>
+        <image name="btn_user_selected" width="24" height="24"/>
     </resources>
 </document>

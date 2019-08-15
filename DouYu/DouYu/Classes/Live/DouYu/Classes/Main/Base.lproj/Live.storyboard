@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qs3-MQ-tSL">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,7 +14,7 @@
             <objects>
                 <viewController id="LEu-jd-Ks6" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xhc-bk-inT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="kjO-NL-zKq"/>
@@ -26,7 +29,7 @@
         <scene sceneID="iXF-lm-hVF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qs3-MQ-tSL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="直播" image="my" selectedImage="my_fill" id="zHc-PC-ZtT">
+                    <tabBarItem key="tabBarItem" title="直播" image="btn_live_normal" selectedImage="btn_live_selected" id="zHc-PC-ZtT">
                         <color key="badgeColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -45,7 +48,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="my" width="32" height="32"/>
-        <image name="my_fill" width="32" height="32"/>
+        <image name="btn_live_normal" width="30" height="24"/>
+        <image name="btn_live_selected" width="30" height="24"/>
     </resources>
 </document>
