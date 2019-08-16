@@ -92,6 +92,8 @@ extension PageTitleVIew {
         // 获取第一个label
         guard let firstLabel = titleLabels.first else { return }
         
+        firstLabel.textColor = UIColor.orange
+        
         // 设置scrollLine属性
         scrollLine.frame = CGRect(x: firstLabel.frame.origin.x, y: frame.height - kScrollLineHeight, width: firstLabel.frame.width, height: kScrollLineHeight)
         

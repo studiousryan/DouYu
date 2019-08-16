@@ -11,6 +11,7 @@ import UIKit
 private let kTitleViewHeight: CGFloat = 40
 
 class HomeViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,6 +35,12 @@ extension HomeViewController {
         
         let pageTitleView = PageTitleVIew(frame: titleFrame, titles: titles)
         view.addSubview(pageTitleView)
+        
+        pageTitleView.translatesAutoresizingMaskIntoConstraints = false
+        pageTitleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        pageTitleView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        pageTitleView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        pageTitleView.heightAnchor.constraint(equalToConstant: kTitleViewHeight).isActive = true
     }
     
     private func setNavigationBar() {
