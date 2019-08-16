@@ -8,11 +8,39 @@
 
 import UIKit
 
+protocol PageTitleViewDelegate: class {
+    func PageTitleView(pageTitleView: PageTitleVIew, selectedIndex: Int)
+}
+
 private let kScrollLineHeight: CGFloat = 2
 
 class PageTitleVIew: UIView {
-    var titleLabels: [UILabel] = []
+    private var currentLableIndex: Int = 0
+    weak var delegate: PageTitleViewDelegate?
     
+    // titleLabels
+    private lazy var titleLabels: [UILabel] = [UILabel]()
+    
+    // scrollView
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.scrollsToTop = false
+        scrollView.bounces = false
+        scrollView.frame = bounds
+        
+        return scrollView
+    }()
+    
+    // scrollLine
+    private lazy var scrollLine: UIView = {
+        let scrollLine = UIView()
+        scrollLine.backgroundColor = UIColor.orange
+        
+        return scrollLine
+    }()
+    
+    // 初始化
     init(frame: CGRect, titles: [String]) {
         super.init(frame: frame)
         
@@ -25,29 +53,23 @@ class PageTitleVIew: UIView {
     }
 }
 
+// MARK:- 设置UI
 extension PageTitleVIew {
     private func setupUI(titles: [String]) {
+        // 添加scrollView
+        addSubview(scrollView)
+        
         // 添加titles对应的labels
         setupTitleLabels(titles: titles)
         
-        // 添加scrollView
-        setupScrollView()
-        
         // 设置底线
         setupBottomLine()
-    }
-    
-    private func setupScrollView() {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.scrollsToTop = false
-        scrollView.bounces = false
-        scrollView.frame = bounds
         
-        addSubview(scrollView)
+        // 添加scrollLine
+        scrollView.addSubview(scrollLine)
         
-        // 设置底部滚动滑块
-        setupScrollLine(scrollView: scrollView)
+        // 设置scrollLine
+        setupScrollLine()
     }
     
     private func setupTitleLabels(titles: [String]) {
@@ -71,8 +93,12 @@ extension PageTitleVIew {
             
             // 添加Label
             addSubview(label)
-            
             titleLabels.append(label)
+            
+            // 给label添加手势控制
+            label.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tilteLabelTapped))
+            label.addGestureRecognizer(tapGesture)
         }
     }
     
@@ -85,10 +111,7 @@ extension PageTitleVIew {
         addSubview(bottomLineView)
     }
     
-    private func setupScrollLine(scrollView: UIScrollView) {
-        let scrollLine = UIView()
-        scrollLine.backgroundColor = UIColor.orange
-        
+    private func setupScrollLine() {
         // 获取第一个label
         guard let firstLabel = titleLabels.first else { return }
         
@@ -96,8 +119,32 @@ extension PageTitleVIew {
         
         // 设置scrollLine属性
         scrollLine.frame = CGRect(x: firstLabel.frame.origin.x, y: frame.height - kScrollLineHeight, width: firstLabel.frame.width, height: kScrollLineHeight)
+    }
+}
+
+// MARK:- 监听点击
+extension PageTitleVIew {
+    @objc private func tilteLabelTapped(tapGesture: UITapGestureRecognizer) {
+        // 获取当前label
+        guard let currentLabel = tapGesture.view as? UILabel else { return }
         
-        // 添加scrollLine
-        scrollView.addSubview(scrollLine)
+        // 获取之前label
+        let previousLabel = titleLabels[currentLableIndex]
+        
+        // 调整label颜色
+        previousLabel.textColor = UIColor.darkGray
+        currentLabel.textColor = UIColor.orange
+        
+        // 更新当前label下标
+        currentLableIndex = currentLabel.tag
+        
+        // 更新scorllLine位置
+        let scrollLineX = CGFloat(currentLableIndex) * scrollLine.frame.width
+        UIView.animate(withDuration: 0.15) {
+            self.scrollLine.frame.origin.x = scrollLineX
+        }
+        
+        // 通知代理
+        delegate?.PageTitleView(pageTitleView: self, selectedIndex: currentLableIndex)
     }
 }

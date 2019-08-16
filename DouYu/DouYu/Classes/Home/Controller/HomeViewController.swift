@@ -11,17 +11,18 @@ import UIKit
 private let kTitleViewHeight: CGFloat = 40
 
 class HomeViewController: UIViewController {
-    private lazy var pageTitleView: PageTitleVIew = {
+    private lazy var pageTitleView: PageTitleVIew = { [weak self] in
         let viewTitles = ["推荐", "游戏", "娱乐", "趣玩"]
         let viewFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kTitleViewHeight)
         let pageTitleView = PageTitleVIew(frame: viewFrame, titles: viewTitles)
+        pageTitleView.delegate = self
         
         return pageTitleView
     }()
     
     
     
-    private lazy var pageContentView: PageContentView = {
+    private lazy var pageContentView: PageContentView = { [weak self] in
         // 设置frame
         let viewHeight = kScreenHeight - kStatusBarHeight - kNavigationBarHeight - kTitleViewHeight
         let viewFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: viewHeight)
@@ -113,3 +114,13 @@ extension HomeViewController {
         pageContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
+
+
+// MARK:- 遵守PageTitleViewDelegate协议
+extension HomeViewController: PageTitleViewDelegate {
+    func PageTitleView(pageTitleView: PageTitleVIew, selectedIndex: Int) {
+        pageContentView.updateCurrentLabelIndex(index: selectedIndex)
+    }
+}
+
+

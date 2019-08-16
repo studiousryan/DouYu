@@ -12,18 +12,18 @@ private let ContentCellID = "ContentCellID"
 
 class PageContentView: UIView {
     private var childVCs: [UIViewController]
-    private var parentVC: UIViewController
+    private weak var parentVC: UIViewController?
     
-    private lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = { [weak self] in
         // 配置layout
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = self.bounds.size
+        layout.itemSize = (self?.bounds.size)!
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
         
         // 创建UICollectionView
-        let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: (self?.bounds)!, collectionViewLayout: layout)
         collectionView.isPagingEnabled = true
         collectionView.bounces = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -37,7 +37,7 @@ class PageContentView: UIView {
         return collectionView
     }()
     
-    init(frame: CGRect, childVCs: [UIViewController], parentVC: UIViewController) {
+    init(frame: CGRect, childVCs: [UIViewController], parentVC: UIViewController?) {
         self.childVCs = childVCs
         self.parentVC = parentVC
         
@@ -56,7 +56,7 @@ extension PageContentView {
     private func setupUI() {
         // 将所有子控制器添加到父控制器
         for childVC in childVCs {
-            parentVC.addChild(childVC)
+            parentVC?.addChild(childVC)
         }
         
         // 添加UICollectionView
@@ -79,5 +79,13 @@ extension PageContentView: UICollectionViewDataSource {
         cell.contentView.addSubview(childVC.view)
         
         return cell
+    }
+}
+
+// MARK:- 对外暴露方法
+extension PageContentView {
+    func updateCurrentLabelIndex(index: Int) {
+        let offsetX = CGFloat(index) * collectionView.frame.width
+        collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
     }
 }
