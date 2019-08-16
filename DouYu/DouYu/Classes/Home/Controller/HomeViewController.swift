@@ -11,10 +11,10 @@ import UIKit
 private let kTitleViewHeight: CGFloat = 40
 
 class HomeViewController: UIViewController {
-    private lazy var pageTitleView: PageTitleVIew = { [weak self] in
+    private lazy var pageTitleView: PageTitleView = { [weak self] in
         let viewTitles = ["推荐", "游戏", "娱乐", "趣玩"]
         let viewFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kTitleViewHeight)
-        let pageTitleView = PageTitleVIew(frame: viewFrame, titles: viewTitles)
+        let pageTitleView = PageTitleView(frame: viewFrame, titles: viewTitles)
         pageTitleView.delegate = self
         
         return pageTitleView
@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
         }
         
         let pageContentView = PageContentView(frame: viewFrame, childVCs: childVCs, parentVC: self)
+        pageContentView.delegate = self
         
         return pageContentView
     }()
@@ -118,9 +119,14 @@ extension HomeViewController {
 
 // MARK:- 遵守PageTitleViewDelegate协议
 extension HomeViewController: PageTitleViewDelegate {
-    func PageTitleView(pageTitleView: PageTitleVIew, selectedIndex: Int) {
+    func pageTitleView(pageTitleView: PageTitleView, selectedIndex: Int) {
         pageContentView.updateCurrentLabelIndex(index: selectedIndex)
     }
 }
 
-
+// MARK:- 遵守PageContentViewDelegate协议
+extension HomeViewController: PageContentViewDelegate {
+    func pageContentView(pageContentView: PageContentView, beginningIndex: Int, targetIndex: Int, progress: CGFloat) {
+        pageTitleView.updateTitleView(beginningIndex: beginningIndex, targetIndex: targetIndex, progress: progress)
+    }
+}

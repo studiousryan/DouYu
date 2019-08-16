@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol PageContentViewDelegate: class {
+    func pageContentView(pageContentView: PageContentView, beginningIndex: Int, targetIndex: Int, progress: CGFloat)
+}
+
 private let ContentCellID = "ContentCellID"
 
 class PageContentView: UIView {
     private var childVCs: [UIViewController]
     private weak var parentVC: UIViewController?
+    private var beginningOffsetX: CGFloat = 0
+    weak var delegate: PageContentViewDelegate?
     
     private lazy var collectionView: UICollectionView = { [weak self] in
         // 配置layout
@@ -30,6 +36,9 @@ class PageContentView: UIView {
         
         // 配置数据来源
         collectionView.dataSource = self
+        
+        // 遵守协议
+        collectionView.delegate = self
         
         // 注册UICollectionViewCell
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ContentCellID)
@@ -82,6 +91,74 @@ extension PageContentView: UICollectionViewDataSource {
     }
 }
 
+// MARK:- 遵守UICollectionViewDelegate协议
+extension PageContentView: UICollectionViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        beginningOffsetX = scrollView.contentOffset.x
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 定义所需数据
+        var progress: CGFloat = 0
+        var beginningIndex: Int = 0
+        var targetIndex: Int = 0
+        
+        // 判断滑动方向和比例
+        let currentOffsetX = scrollView.contentOffset.x
+        let offsetDiff = currentOffsetX - beginningOffsetX
+        let offsetDiffAbsolute = abs(offsetDiff)
+        let scrollViewScreenWidth = scrollView.bounds.width
+        
+        progress = offsetDiffAbsolute / scrollViewScreenWidth
+        
+        // 左滑
+        if offsetDiff > 0 {
+            beginningIndex = Int(currentOffsetX / scrollViewScreenWidth)
+            
+            
+            
+            targetIndex = beginningIndex + 1
+            
+            // 防止越界
+            if targetIndex >= childVCs.count {
+                targetIndex = childVCs.count - 1
+            }
+            
+            // 一次滑过一个view
+            if offsetDiffAbsolute == scrollViewScreenWidth {
+                print("in if 里面的 iffffff")
+                targetIndex = beginningIndex
+            }
+        }
+        // 右滑
+        else if offsetDiff < 0 {
+            targetIndex = Int(currentOffsetX / scrollViewScreenWidth)
+            
+            beginningIndex = targetIndex + 1
+            
+            // 防止越界
+            if beginningIndex >= childVCs.count {
+                beginningIndex = childVCs.count - 1
+            }
+            
+            // 一次滑过一个view
+            if offsetDiffAbsolute == scrollViewScreenWidth {
+                beginningIndex = beginningIndex - 1
+            }
+        }
+        else {
+            beginningIndex = Int(currentOffsetX / scrollViewScreenWidth)
+        }
+        
+//        print("currentOffsetX: \(currentOffsetX) | scrollViewScreenWidth: \(scrollViewScreenWidth) | beginningIndex: \(beginningIndex) | targetIndex: \(targetIndex)")
+        
+        progress = offsetDiffAbsolute / scrollViewScreenWidth
+        
+        // 将beginning, targetIndex, progress 传给 PageTitleView
+        delegate?.pageContentView(pageContentView: self, beginningIndex: beginningIndex, targetIndex: targetIndex, progress: progress)
+    }
+}
+
 // MARK:- 对外暴露方法
 extension PageContentView {
     func updateCurrentLabelIndex(index: Int) {
@@ -89,3 +166,5 @@ extension PageContentView {
         collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
     }
 }
+
+

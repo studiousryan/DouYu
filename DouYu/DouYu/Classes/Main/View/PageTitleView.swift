@@ -9,12 +9,12 @@
 import UIKit
 
 protocol PageTitleViewDelegate: class {
-    func PageTitleView(pageTitleView: PageTitleVIew, selectedIndex: Int)
+    func pageTitleView(pageTitleView: PageTitleView, selectedIndex: Int)
 }
 
 private let kScrollLineHeight: CGFloat = 2
 
-class PageTitleVIew: UIView {
+class PageTitleView: UIView {
     private var currentLableIndex: Int = 0
     weak var delegate: PageTitleViewDelegate?
     
@@ -54,7 +54,7 @@ class PageTitleVIew: UIView {
 }
 
 // MARK:- 设置UI
-extension PageTitleVIew {
+extension PageTitleView {
     private func setupUI(titles: [String]) {
         // 添加scrollView
         addSubview(scrollView)
@@ -123,7 +123,7 @@ extension PageTitleVIew {
 }
 
 // MARK:- 监听点击
-extension PageTitleVIew {
+extension PageTitleView {
     @objc private func tilteLabelTapped(tapGesture: UITapGestureRecognizer) {
         // 获取当前label
         guard let currentLabel = tapGesture.view as? UILabel else { return }
@@ -145,6 +145,20 @@ extension PageTitleVIew {
         }
         
         // 通知代理
-        delegate?.PageTitleView(pageTitleView: self, selectedIndex: currentLableIndex)
+        delegate?.pageTitleView(pageTitleView: self, selectedIndex: currentLableIndex)
+    }
+}
+
+// MARK:- 对外暴露方法
+extension PageTitleView {
+    func updateTitleView(beginningIndex: Int, targetIndex: Int, progress: CGFloat) {
+        // 获取 beginningLabel 和 targetLabel
+        let beginningLabel = titleLabels[beginningIndex]
+        let targetLabel = titleLabels[targetIndex]
+        
+        // 处理滑块逻辑
+        let XAvailableDistance = targetLabel.frame.origin.x - beginningLabel.frame.origin.x
+        let actualDistance = XAvailableDistance * progress
+        scrollLine.frame.origin.x = beginningLabel.frame.origin.x + actualDistance
     }
 }
