@@ -126,7 +126,6 @@ extension PageContentView: UICollectionViewDelegate {
             
             // 一次滑过一个view
             if offsetDiffAbsolute == scrollViewScreenWidth {
-                print("in if 里面的 iffffff")
                 targetIndex = beginningIndex
             }
         }
@@ -148,6 +147,7 @@ extension PageContentView: UICollectionViewDelegate {
         }
         else {
             beginningIndex = Int(currentOffsetX / scrollViewScreenWidth)
+            targetIndex = beginningIndex
         }
         
 //        print("currentOffsetX: \(currentOffsetX) | scrollViewScreenWidth: \(scrollViewScreenWidth) | beginningIndex: \(beginningIndex) | targetIndex: \(targetIndex)")
@@ -161,7 +161,7 @@ extension PageContentView: UICollectionViewDelegate {
 
 // MARK:- 对外暴露方法
 extension PageContentView {
-    func updateCurrentLabelIndex(index: Int) {
+    func updateCurrentLabelIndex(index: Int) {        
         let offsetX = CGFloat(index) * collectionView.frame.width
         collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
     }

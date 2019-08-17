@@ -16,6 +16,8 @@ private let kScrollLineHeight: CGFloat = 2
 
 class PageTitleView: UIView {
     private var currentLableIndex: Int = 0
+    private var isChangeFromTap: Bool = false
+    private var actualDistance: CGFloat = 0
     weak var delegate: PageTitleViewDelegate?
     
     // titleLabels
@@ -125,6 +127,8 @@ extension PageTitleView {
 // MARK:- 监听点击
 extension PageTitleView {
     @objc private func tilteLabelTapped(tapGesture: UITapGestureRecognizer) {
+        isChangeFromTap = true
+        
         // 获取当前label
         guard let currentLabel = tapGesture.view as? UILabel else { return }
         
@@ -151,6 +155,8 @@ extension PageTitleView {
 
 // MARK:- 对外暴露方法
 extension PageTitleView {
+    
+    
     func updateTitleView(beginningIndex: Int, targetIndex: Int, progress: CGFloat) {
         // 获取 beginningLabel 和 targetLabel
         let beginningLabel = titleLabels[beginningIndex]
@@ -158,7 +164,21 @@ extension PageTitleView {
         
         // 处理滑块逻辑
         let XAvailableDistance = targetLabel.frame.origin.x - beginningLabel.frame.origin.x
-        let actualDistance = XAvailableDistance * progress
+        
+        if isChangeFromTap {
+            actualDistance = XAvailableDistance
+        } else {
+            actualDistance = XAvailableDistance * progress
+        }
+        
         scrollLine.frame.origin.x = beginningLabel.frame.origin.x + actualDistance
+        
+        // 更新 title label 字体颜色
+        for label in titleLabels {
+            label.textColor = UIColor.darkGray
+        }
+        targetLabel.textColor = UIColor.orange
+        
+        
     }
 }
