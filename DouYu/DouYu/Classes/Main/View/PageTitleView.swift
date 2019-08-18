@@ -29,7 +29,6 @@ class PageTitleView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.scrollsToTop = false
         scrollView.bounces = false
-        scrollView.frame = bounds
         
         return scrollView
     }()
@@ -60,6 +59,7 @@ extension PageTitleView {
     private func setupUI(titles: [String]) {
         // 添加scrollView
         addSubview(scrollView)
+        scrollView.frame = bounds
         
         // 添加titles对应的labels
         setupTitleLabels(titles: titles)
@@ -94,7 +94,7 @@ extension PageTitleView {
             label.frame = CGRect(x: labelX, y: labelY, width: labelWidth, height: labelHeight)
             
             // 添加Label
-            addSubview(label)
+            scrollView.addSubview(label)
             titleLabels.append(label)
             
             // 给label添加手势控制
@@ -135,12 +135,12 @@ extension PageTitleView {
         // 获取之前label
         let previousLabel = titleLabels[currentLableIndex]
         
+        // 更新当前label下标
+        currentLableIndex = currentLabel.tag
+        
         // 调整label颜色
         previousLabel.textColor = UIColor.darkGray
         currentLabel.textColor = UIColor.orange
-        
-        // 更新当前label下标
-        currentLableIndex = currentLabel.tag
         
         // 更新scorllLine位置
         let scrollLineX = CGFloat(currentLableIndex) * scrollLine.frame.width
@@ -155,30 +155,26 @@ extension PageTitleView {
 
 // MARK:- 对外暴露方法
 extension PageTitleView {
-    
-    
     func updateTitleView(beginningIndex: Int, targetIndex: Int, progress: CGFloat) {
         // 获取 beginningLabel 和 targetLabel
         let beginningLabel = titleLabels[beginningIndex]
         let targetLabel = titleLabels[targetIndex]
         
         // 处理滑块逻辑
-        let XAvailableDistance = targetLabel.frame.origin.x - beginningLabel.frame.origin.x
+        let moveTotalX = targetLabel.frame.origin.x - beginningLabel.frame.origin.x
+        let moveX = moveTotalX * progress
+        scrollLine.frame.origin.x = beginningLabel.frame.origin.x + moveX
         
-        if isChangeFromTap {
-            actualDistance = XAvailableDistance
-        } else {
-            actualDistance = XAvailableDistance * progress
+        // 记录最新index
+        currentLableIndex = targetIndex
+        
+        // 滚动过半才改变label颜色
+        if progress > 0.5 {
+            // 更新 title label 字体颜色
+            for label in titleLabels {
+                label.textColor = UIColor.darkGray
+            }
+            targetLabel.textColor = UIColor.orange
         }
-        
-        scrollLine.frame.origin.x = beginningLabel.frame.origin.x + actualDistance
-        
-        // 更新 title label 字体颜色
-        for label in titleLabels {
-            label.textColor = UIColor.darkGray
-        }
-        targetLabel.textColor = UIColor.orange
-        
-        
     }
 }

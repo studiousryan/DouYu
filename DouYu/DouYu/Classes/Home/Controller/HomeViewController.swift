@@ -12,15 +12,14 @@ private let kTitleViewHeight: CGFloat = 40
 
 class HomeViewController: UIViewController {
     private lazy var pageTitleView: PageTitleView = { [weak self] in
-        let viewTitles = ["推荐", "游戏", "娱乐", "趣玩"]
         let viewFrame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kTitleViewHeight)
+        let viewTitles = ["推荐", "游戏", "娱乐", "趣玩"]
         let pageTitleView = PageTitleView(frame: viewFrame, titles: viewTitles)
+        
         pageTitleView.delegate = self
         
         return pageTitleView
     }()
-    
-    
     
     private lazy var pageContentView: PageContentView = { [weak self] in
         // 设置frame
@@ -29,9 +28,20 @@ class HomeViewController: UIViewController {
 
         // 创建子控制器
         var childVCs = [UIViewController]()
-        for _ in 0..<4 {
+        for index in 0..<4 {
             let VC = UIViewController()
-            VC.view.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)), green: CGFloat(arc4random_uniform(255)), blue: CGFloat(arc4random_uniform(255)))
+            
+            VC.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            
+            if index == 0 {
+                VC.view.backgroundColor = UIColor.red
+            } else if index == 1 {
+                VC.view.backgroundColor = UIColor.green
+            } else if index == 2 {
+                VC.view.backgroundColor = UIColor.blue
+            } else if index == 3 {
+                VC.view.backgroundColor = UIColor.darkGray
+            }
             
             childVCs.append(VC)
         }
@@ -65,22 +75,13 @@ extension HomeViewController {
         
         // 添加pageContentView
         view.addSubview(pageContentView)
-//        pageContentView.backgroundColor = UIColor.orange
         
         // 设置pageContentView位置
         setPageContentViewPosition(pageContentView: pageContentView)
+        
+        // 调整pageContentView子控制器frame
+        setSubviewFrames(view: pageContentView)
     }
-    
-//    private func setPageTitleView() {
-//        let titleFrame = CGRect(x: 0, y: kStatusBarHeight + kNavigationBarHeight, width: kScreenWidth, height: kTitleViewHeight)
-//        let titles = ["推荐", "游戏", "娱乐", "趣玩"]
-//        
-//        let pageTitleView = PageTitleVIew(frame: titleFrame, titles: titles)
-//        view.addSubview(pageTitleView)
-//        
-//        // 设置pageTitleView位置
-//        setPageTitleViewPosition(pageTitleView: pageTitleView)
-//    }
     
     private func setNavigationBar() {
         
@@ -113,6 +114,18 @@ extension HomeViewController {
         pageContentView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         pageContentView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         pageContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    private func setSubviewFrames(view: UIView) {
+        let subviews = view.subviews
+        
+        for subview in subviews {
+            subview.translatesAutoresizingMaskIntoConstraints = false
+            subview.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            subview.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            subview.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            subview.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
     }
 }
 
