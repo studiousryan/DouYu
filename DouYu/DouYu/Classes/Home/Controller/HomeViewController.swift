@@ -28,10 +28,12 @@ class HomeViewController: UIViewController {
 
         // 创建子控制器
         var childVCs = [UIViewController]()
-        for index in 0..<4 {
+        childVCs.append(RecommendationVC())
+        
+        for index in 0..<3 {
             let VC = UIViewController()
             
-            VC.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+//            VC.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             
             if index == 0 {
                 VC.view.backgroundColor = UIColor.red
@@ -46,8 +48,14 @@ class HomeViewController: UIViewController {
             childVCs.append(VC)
         }
         
+        for VC in childVCs {
+            VC.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        }
+        
         let pageContentView = PageContentView(frame: viewFrame, childVCs: childVCs, parentVC: self)
         pageContentView.delegate = self
+        
+        
         
         return pageContentView
     }()
@@ -75,12 +83,16 @@ extension HomeViewController {
         
         // 添加pageContentView
         view.addSubview(pageContentView)
+        pageContentView.backgroundColor = UIColor.purple
         
         // 设置pageContentView位置
         setPageContentViewPosition(pageContentView: pageContentView)
         
+        // 设置pageContentView下面collectionView位置
+//        setPageContentViewCollectionViewPosition()
+        
         // 调整pageContentView子控制器frame
-        setSubviewFrames(view: pageContentView)
+//        setSubviewFrames(view: pageContentView)
     }
     
     private func setNavigationBar() {
@@ -110,11 +122,21 @@ extension HomeViewController {
     
     private func setPageContentViewPosition(pageContentView: UIView) {
         pageContentView.translatesAutoresizingMaskIntoConstraints = false
-        pageContentView.topAnchor.constraint(equalTo: pageTitleView.bottomAnchor).isActive = true
+        pageContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: kTitleViewHeight).isActive = true
         pageContentView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         pageContentView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         pageContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
+    
+    private func setPageContentViewCollectionViewPosition() {
+        pageContentView.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        pageContentView.collectionView.topAnchor.constraint(equalTo: pageContentView.topAnchor).isActive = true
+        pageContentView.collectionView.leftAnchor.constraint(equalTo: pageContentView.leftAnchor).isActive = true
+        pageContentView.collectionView.rightAnchor.constraint(equalTo: pageContentView.rightAnchor).isActive = true
+        pageContentView.collectionView.bottomAnchor.constraint(equalTo: pageContentView.bottomAnchor).isActive = true
+    }
+    
+    
     
     private func setSubviewFrames(view: UIView) {
         let subviews = view.subviews
